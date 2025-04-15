@@ -3,21 +3,19 @@ const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
     title: {
-        type: string,
+        type: String,
         required: [true, "Pole tytuł jest wymagane"],
         minLength: [3, "Minimalna liczba znaków: 3"],
         trim: true,
-        lowercase: true
     },
     description: {
-        type: string,
+        type: String,
         required: [true, "Pole opis jest wymagane"],
         minLength: [3, "Minimalna liczba znaków: 3"],
         trim: true,
-        lowercase: true
     },
     category: {
-        type: string,
+        type: String,
         required: [true, "Pole kategoria jest wymagane"],
         minLength: [3, "Minimalna liczba znaków: 3"],
         trim: true,
