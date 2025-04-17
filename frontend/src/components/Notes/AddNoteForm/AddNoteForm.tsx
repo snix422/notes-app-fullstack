@@ -3,6 +3,7 @@ import { useContext } from "react"
 import NoteContext from "../../../context/NoteContext"
 import { categories } from "../../../data/mockData"
 import { Button, FormWrapper, Input, Select, TextArea } from "./AddNoteForm.style"
+import useNotes from "../../../hooks/useNotes"
 
 
 interface NoteInputs {
@@ -14,17 +15,23 @@ interface NoteInputs {
 const AddNoteForm = () => {
     const {register,handleSubmit,formState:{errors},reset} = useForm<NoteInputs>()
 
-    const {addNote} = useContext(NoteContext)
+    //const {addNote} = useContext(NoteContext)
+    const { addNote } = useNotes();
 
-    const onSubmit : SubmitHandler<NoteInputs> = (data:NoteInputs) => {
+    const onSubmit : SubmitHandler<NoteInputs> = async (data:NoteInputs) => {
         console.log(data);
-        const newNote = {
-            title:data.title,
-            content:data.content,
-            category:data.category
+        try {
+            const newNote = {
+                title:data.title,
+                description:data.content,
+                category:data.category
+            }
+            await addNote(newNote);
+            reset(); 
+        } catch (error) {
+            console.log(error);
         }
-        addNote(newNote);
-        reset();
+       
     }
 
     return(
