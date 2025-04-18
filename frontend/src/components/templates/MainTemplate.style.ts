@@ -7,7 +7,14 @@ export const Wrapper = styled.div`
     width: 100vw;
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.lightGrey};
-    overflow: hidden;
+    border:2px solid blue;
+
+    @media(max-width:1024px){
+        height: auto;
+        grid-template-columns: 100%;
+        grid-template-rows: 5vh 10vh auto auto;
+        overflow: visible;
+    }
 `;
 
 export const NavbarWrapper = styled.div`
@@ -30,6 +37,11 @@ export const MainContent = styled.div`
     grid-column: 1 / 2;
     background-color: ${({ theme }) => theme.colors.white || "white"};
     overflow-y: auto;
+
+    @media(max-width:1024px) {
+        grid-row: 3/4;
+        grid-column: 1/2;
+    }
 `;
 
 export const ArticlesSection = styled.div`
@@ -37,4 +49,10 @@ export const ArticlesSection = styled.div`
     grid-column: 2 / 3;
     background-color: ${({ theme }) => theme.colors.darkGrey || "#f0f0f0"};
     overflow-y: auto;
+
+    @media(max-width:1024px){
+        min-height: 100vh;
+        grid-row: 4 / 5;
+        grid-column: 1 / 2;
+    }
 `;

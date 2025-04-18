@@ -24,7 +24,8 @@ class NoteController {
             const newNote = {
                 title: title,
                 description: description,
-                category: category
+                category: category,
+                userId: req.user.id
             }
 
             await Note.create(newNote);
@@ -44,6 +45,16 @@ class NoteController {
             res.status(200).json({ message: "Notatka usunięta pomyślnie" });
         } catch (error) {
             res.status(500).json({ error: `Błąd : ${error.message}` })
+        }
+    }
+
+    async getUserNotes(req, res) {
+        try {
+            const userId = req.user.id;
+            const notes = await Note.find({ userId });
+            res.status(200).json(notes);
+        } catch (error) {
+            res.status(500).json({ error: `Błąd serwera: ${error.message}` });
         }
     }
 }

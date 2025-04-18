@@ -16,6 +16,10 @@ export const SearchForm = styled.form`
     gap: 10px;
     width: 100%;
     max-width: 600px;
+
+    @media(max-width:1024px){
+        flex-direction:column;
+    }
 `;
 
 export const SearchInput = styled.input`
@@ -26,6 +30,7 @@ export const SearchInput = styled.input`
     border-radius: 8px;
     outline: none;
     transition: border-color 0.3s ease-in-out;
+    width: 50%;
 
     &:focus {
         border-color: ${({ theme }) => theme.colors.primary || "black"};
@@ -40,4 +45,5 @@ export const SearchSelect = styled.select`
     background-color: white;
     cursor: pointer;
     outline: none;
+    width: 50%;
 `;

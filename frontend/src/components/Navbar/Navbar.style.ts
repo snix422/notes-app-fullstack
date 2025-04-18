@@ -9,6 +9,7 @@ export const NavBar = styled.nav`
     justify-content:center;
     align-items:center;
     gap:30px;
+    position: relative;
 `
 
 export const StyledLink = styled(NavLink)`

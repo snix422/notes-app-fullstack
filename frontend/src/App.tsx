@@ -6,15 +6,20 @@ import NotePage from './pages/NotesPage'
 import * as msw from "msw";
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import { useAuth } from './hooks/useAuth'
+import StartPage from './pages/StartPage'
 console.log(msw);
 
 function App() {
+
+  const {user} = useAuth();
+  console.log(user)
  
   return (
       
       <MainTemplate>
           <Routes>
-            <Route path='/' element={<NotePage />} />
+            <Route path='/' element={ user ? <NotePage /> : <StartPage />} />
             <Route path='/add-note' element={<AddNotePage />} /> 
             <Route path='/signin' element={<SignIn />} />
             <Route path='/signup' element={<SignUp />} />

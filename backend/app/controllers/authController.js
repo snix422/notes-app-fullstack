@@ -3,13 +3,13 @@ const { sessionSecretKey } = require("../config")
 const jwt = require("jsonwebtoken")
 class AuthController {
     async register(req, res) {
-        const { email, password } = req.body;
+        const { email, password, name } = req.body;
         try {
             const userExist = await User.findOne({ email });
             if (userExist) {
                 return res.status(400).json({ error: "Użytkownik już istnieje" });
             }
-            const newUser = new User({ email, password });
+            const newUser = new User({ email, password, name });
             if (email.includes("admin")) {
                 newUser.role = "admin"
             }
@@ -17,7 +17,7 @@ class AuthController {
             const token = jwt.sign({ userId: newUser._id, role: newUser.role }, sessionSecretKey, { expiresIn: "1h" });
             res.status(201).json({
                 message: "Rejestracja zakończona sukcesem!",
-                token
+                token,
             });
         } catch (error) {
             res.status(500).json({ error: `Błąd serwera: ${error.message}` });
@@ -38,7 +38,12 @@ class AuthController {
             const token = jwt.sign({ userId: user._id, role: user.role }, sessionSecretKey, { expiresIn: "1h" });
             res.status(200).json({
                 message: "Zalogowano pomyślnie",
-                token
+                token,
+                user: {
+                    email: user.email,
+                    name: user.name,
+                    role: user.role
+                }
             });
         } catch (error) {
             res.status(500).json({ error: `Błąd serwera: ${error.message}` });

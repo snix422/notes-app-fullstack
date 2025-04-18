@@ -20,6 +20,9 @@ const noteSchema = new Schema({
         minLength: [3, "Minimalna liczba znaków: 3"],
         trim: true,
         lowercase: true
+    },
+    userId: {
+        type: String | Number,
     }
 })
 
