@@ -28,7 +28,6 @@ export const SearchbarWrapper = styled.div`
 export const MainContent = styled.div`
     grid-row: 3 / 4;
     grid-column: 1 / 2;
-    padding: 20px;
     background-color: ${({ theme }) => theme.colors.white || "white"};
     overflow-y: auto;
 `;

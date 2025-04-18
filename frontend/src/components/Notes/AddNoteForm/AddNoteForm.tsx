@@ -15,7 +15,7 @@ interface NoteInputs {
 const AddNoteForm = () => {
     const {register,handleSubmit,formState:{errors},reset} = useForm<NoteInputs>()
 
-    //const {addNote} = useContext(NoteContext)
+    
     const { addNote } = useNotes();
 
     const onSubmit : SubmitHandler<NoteInputs> = async (data:NoteInputs) => {
