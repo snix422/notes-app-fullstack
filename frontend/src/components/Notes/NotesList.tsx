@@ -15,6 +15,14 @@ const Wrapper = styled.div`
     align-items:flex-start;
     flex-wrap:wrap;
     margin-top: 4rem;
+    row-gap:1rem;
+
+    @media(max-width:1024px){
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap:2rem;
+    }
 `
 
 const NotesList : React.FC<NotesListProps> = ({notes,removeNote}) => {

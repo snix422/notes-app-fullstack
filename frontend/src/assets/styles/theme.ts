@@ -1,6 +1,7 @@
-import { themeType } from "../../types/type";
+import { DefaultTheme } from "styled-components";
 
-export const theme : themeType = {
+
+export const theme : DefaultTheme = {
     colors: {
       white: '#FFFFFF',
       lightGrey: '#F7F8FA',
@@ -12,6 +13,12 @@ export const theme : themeType = {
       warning: '#E1D888',
       darkPurple: '#C0C7D6',
       lightPurple: '#ECEFF7',
+      lightGreyBody:'#F5F5F5',
+      lightGreyNav:'#F0F0F0',
+      darkBlueLinks:'#2C3E50',
+      solidBlueHoverLinks:'#2C3E50',
+      darkGreyFont:'#2C2C2C',
+      searchBar:'#2C2C2C'
     },
     fontSize: {
       xxl: '34px',

@@ -10,6 +10,13 @@ export const UserItemWrapper = styled.div`
     align-items: center;
     border-radius: 0.5rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+    @media(max-width:1024px){
+        width: 50vw;
+    }
+    @media(max-width:768px){
+        width: 70vw;
+    }
 `
 
 export const EmailHeading = styled.h2`

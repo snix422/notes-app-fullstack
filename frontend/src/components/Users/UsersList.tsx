@@ -11,10 +11,14 @@ const Wrapper = styled.div`
     width:100%;
     height:100%;
     display:flex;
-    justify-content:space-evenly;
     align-items:flex-start;
     flex-wrap:wrap;
     margin-top: 4rem;
+    gap:3rem;
+
+    @media(max-width:1024px){
+        justify-content: center;
+    }
 `
 
 const UsersList : React.FC<UserListProps> = ({users}) => {

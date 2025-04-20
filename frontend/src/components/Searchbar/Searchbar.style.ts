@@ -16,10 +16,6 @@ export const SearchForm = styled.form`
     gap: 10px;
     width: 100%;
     max-width: 600px;
-
-    @media(max-width:1024px){
-        flex-direction:column;
-    }
 `;
 
 export const SearchInput = styled.input`

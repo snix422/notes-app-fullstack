@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
     height:auto;
     padding:20px;
     background-color: ${({theme}) => theme.colors.darkGrey};
-    border:2px solid red;
 `
 
 export const LoadingTitle = styled.h2`

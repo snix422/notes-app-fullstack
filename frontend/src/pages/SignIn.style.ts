@@ -7,7 +7,7 @@ export const MainWrapper = styled.main`
     flex-direction: column;
     align-items: center;
     padding-top: 10rem;
-    background-color: beige;
+
 
     @media(max-width:1024px){
         padding: 3rem 0;
@@ -21,7 +21,6 @@ export const Form = styled.form`
     gap:1rem;
     margin-top: 4rem;
     width: 100%;
-    border:2px solid red;
 `
 
 export const Input = styled.input`

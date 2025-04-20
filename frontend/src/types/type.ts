@@ -24,6 +24,12 @@ declare module 'styled-components' {
         warning: string;
         darkPurple: string;
         lightPurple: string;
+        lightGreyBody:string,
+        lightGreyNav:string,
+        darkBlueLinks:string,
+        solidBlueHoverLinks:string,
+        darkGreyFont:string,
+        searchBar:string
       };
       fontSize: {
         xxl: string;

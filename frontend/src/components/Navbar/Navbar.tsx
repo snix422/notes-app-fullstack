@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom"
 import { NavBar, StyledLink } from "./Navbar.style"
 import AuthLinks from "./AuthLinks"
+import { useAuth } from "../../hooks/useAuth"
 
 const Navbar = () => {
+    const {user} = useAuth()
     return(
         <NavBar>
-            <StyledLink to="/">Twoje notatki</StyledLink>
-            <StyledLink to="/add-note">Dodaj notatkę</StyledLink>
+            {user && <><StyledLink to="/">Twoje notatki</StyledLink>
+                <StyledLink to="/add-note">Dodaj notatkę</StyledLink></> }
             <AuthLinks />
         </NavBar>
     )

@@ -6,6 +6,7 @@ import Alert from '@mui/material/Alert';
 import { useAuth } from "../hooks/useAuth";
 import { CircularProgress } from "@mui/material";
 import { useNotify } from "../hooks/useNotify";
+import { useNavigate } from "react-router-dom";
 
 
 interface SignUpInputs {
@@ -20,6 +21,7 @@ const SignUp = () => {
     const [error,setError] = useState("")
     const { registerUser, registerLoading } = useAuth();
     const { dispatchNotify } = useNotify()
+    const navigate = useNavigate();
 
     const onSubmit : SubmitHandler<SignUpInputs> = async (data) => {
         console.log(data)
@@ -35,6 +37,7 @@ const SignUp = () => {
             }
             const res = await registerUser(credentials);
             dispatchNotify("Zarejestrowano pomyślnie")
+            navigate("/")
             reset();
             return res.data;
         } catch (error:any) {

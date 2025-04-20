@@ -6,7 +6,14 @@ export const AuthLinksContainer = styled.div`
     position: absolute;
     right: 50px;
     display: flex;
+    align-items: center;
     gap:10px;
+
+    @media(max-width:1024px){
+        position: static;
+        justify-content: center;
+        width: 100%;
+    }
 `
 
 export const AuthLink = styled(Link)`

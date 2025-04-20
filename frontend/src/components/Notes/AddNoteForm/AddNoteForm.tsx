@@ -1,9 +1,9 @@
 import { SubmitHandler, useForm } from "react-hook-form"
-import { useContext } from "react"
-import NoteContext from "../../../context/NoteContext"
 import { categories } from "../../../data/mockData"
 import { Button, FormWrapper, Input, Select, TextArea } from "./AddNoteForm.style"
 import useNotes from "../../../hooks/useNotes"
+import { useNotify } from "../../../hooks/useNotify"
+import { useNavigate } from "react-router-dom"
 
 
 interface NoteInputs {
@@ -14,8 +14,8 @@ interface NoteInputs {
 
 const AddNoteForm = () => {
     const {register,handleSubmit,formState:{errors},reset} = useForm<NoteInputs>()
-
-    
+    const {dispatchNotify} = useNotify();
+    const navigate = useNavigate();
     const { addNote } = useNotes();
 
     const onSubmit : SubmitHandler<NoteInputs> = async (data:NoteInputs) => {
@@ -27,8 +27,11 @@ const AddNoteForm = () => {
                 category:data.category
             }
             await addNote(newNote);
+            dispatchNotify("Notatka dodana pomyślnie");
+            navigate("/")
             reset(); 
         } catch (error) {
+            dispatchNotify("Wystąpił problem , niestety nie udało się dodać notatki")
             console.log(error);
         }
        

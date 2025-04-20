@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 const AddNotePage = () => {
     return(
         <Wrapper>
-            <Title text="Dodaj notatkę" />
+            <Title text="Dodaj notatkę" variant="large" />
             <AddNoteForm />
         </Wrapper>
     )
