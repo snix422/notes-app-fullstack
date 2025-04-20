@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient,useMutation } from "@tanstack/react-query"
 import { createNote, getAllNotes, removeNote } from "../api/notes"
+import { useAuth } from "./useAuth";
 
 type NotePayload = {
     title: string;
@@ -8,10 +9,12 @@ type NotePayload = {
   };
 
 const useNotes = () => {
+    const { user } = useAuth();
     const queryClient = useQueryClient();
    const {data : notes , isLoading , error } = useQuery({
     queryKey:['notes-key'],
-    queryFn:getAllNotes
+    queryFn:getAllNotes,
+    enabled:!!user
    })
 
    const addNoteMutation = useMutation({
@@ -22,7 +25,7 @@ const useNotes = () => {
    })
 
    const removeNoteMutation = useMutation({
-    mutationFn:(slug:string) =>removeNote(slug),
+    mutationFn:(id:string) =>removeNote(id),
     onSuccess:()=>{
         queryClient.invalidateQueries({queryKey:['notes-key']})
     }

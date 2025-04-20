@@ -9,6 +9,15 @@ export const getAllNotes = async () => {
     }
 }
 
+export const getUserNotesByName = async (name:string) => {
+    try {
+        const res = await apiClient.get(`/notes/user/${name}`);
+        return res.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const getNoteBySlug = async (slug:string) => {
     try {
         const res = await apiClient.get(`/notes/${slug}`);
@@ -32,9 +41,9 @@ export const createNote = async ({title,description,category}:{title:string,desc
     }
 }
 
-export const removeNote = async (slug:string) => {
+export const removeNote = async (id:string) => {
     try {
-        const res = await apiClient.delete(`/notes/${slug}`);
+        const res = await apiClient.delete(`/notes/${id}`);
         return res.data
     } catch (error) {
         throw error

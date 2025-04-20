@@ -1,4 +1,6 @@
 const Note = require("../db/models/note")
+const User = require("../db/models/user")
+const mongoose = require("mongoose")
 class NoteController {
     async getNotes(req, res) {
         try {
@@ -25,7 +27,7 @@ class NoteController {
                 title: title,
                 description: description,
                 category: category,
-                userId: req.user.id
+                userId: req.user.userId
             }
 
             await Note.create(newNote);
@@ -50,12 +52,42 @@ class NoteController {
 
     async getUserNotes(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.user.userId;
+            console.log(req.user);
+            /*if (!mongoose.Types.ObjectId.isValid(userId)) {
+                return res.status(400).json({ error: "Nieprawidłowy identyfikator użytkownika" });
+            }
+            const objectId = mongoose.Types.ObjectId(userId);*/
+            const userExists = await User.findOne({
+                _id: userId
+            });
+
+            if (!userExists) {
+                return res.status(404).json({ error: "Użytkownik nie istnieje" });
+            }
+
             const notes = await Note.find({ userId });
             res.status(200).json(notes);
         } catch (error) {
             res.status(500).json({ error: `Błąd serwera: ${error.message}` });
         }
+    }
+
+    async getUserNotesByUserId(req, res) {
+        try {
+            const { name } = req.params;
+            const userExists = await User.findOne({ name });
+
+            if (!userExists) {
+                return res.status(404).json({ error: "Użytkownik nie istnieje" });
+            }
+
+            const notes = await Note.find({ userId: userExists._id })
+            res.status(200).json(notes)
+        } catch (error) {
+            res.status(500).json({ error: `Błąd serwera: ${error.message}` })
+        }
+
     }
 }
 

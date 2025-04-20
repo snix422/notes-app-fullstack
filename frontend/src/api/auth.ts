@@ -43,3 +43,12 @@ export const login = async ({email,password}:UserCredentials) :Promise<ResponseD
          throw error
     }
 }
+
+export const getUsers = async () => {
+    try {
+        const res = await apiClient.get("/auth/users");
+        return res.data
+    } catch (error) {
+        throw error
+    }
+}

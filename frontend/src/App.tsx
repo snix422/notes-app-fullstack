@@ -8,6 +8,7 @@ import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import { useAuth } from './hooks/useAuth'
 import StartPage from './pages/StartPage'
+import UserNotesPage from './pages/UserNotesPage'
 console.log(msw);
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path='/add-note' element={<AddNotePage />} /> 
             <Route path='/signin' element={<SignIn />} />
             <Route path='/signup' element={<SignUp />} />
+            <Route path="/user/:name" element={<UserNotesPage />} />
           </Routes>
       </MainTemplate>
        

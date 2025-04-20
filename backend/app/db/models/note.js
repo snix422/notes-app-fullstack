@@ -22,7 +22,7 @@ const noteSchema = new Schema({
         lowercase: true
     },
     userId: {
-        type: String | Number,
+        type: String,
     }
 })
 

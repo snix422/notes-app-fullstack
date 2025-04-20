@@ -1,5 +1,8 @@
 import styled from "styled-components"
 import { Note } from "../../types/type"
+import ModalItem from "../Modal/ModalItem"
+import { useState } from "react"
+
 
 interface NoteItemProps {
     data:Note,
@@ -14,9 +17,9 @@ const Wrapper = styled.div<{size?:"small" | "medium" | "large"}>`
     height:${({size})=> size === "small" ? "20vh" : 
     size === "medium" ? "30vh" : 
     "40vh"};
-    width:${({size}) => size === "small" ? "20vw" : 
-    size === "medium" ? "30vw" : 
-    "40vw"};
+    width:${({size}) => size === "small" ? "15vw" : 
+    size === "medium" ? "20vw" : 
+    "25vw"};
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -24,23 +27,16 @@ const Wrapper = styled.div<{size?:"small" | "medium" | "large"}>`
     background-color:white;
     padding:10px 30px 10px 30px;
     position:relative;
-    border:2px solid blue;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 `
 const TitleHeading = styled.h2<{ fontSize?: "small" | "medium" | "large" }>`
     font-size: ${({ theme, fontSize }) => 
-        fontSize === "small" ? theme.fontSize.s : 
-        fontSize === "medium" ? theme.fontSize.m : 
-        theme.fontSize.l};
+        fontSize === "small" ? theme.fontSize.m : 
+        fontSize === "medium" ? theme.fontSize.xl : 
+        theme.fontSize.xxl};
     color:${({theme}) => theme.colors.black};
 `
 
-const ContentParagraph = styled.p<{ fontSize?: "small" | "medium" | "large" }>`
-    font-size: ${({ theme, fontSize }) => 
-        fontSize === "small" ? theme.fontSize.xs : 
-        fontSize === "medium" ? theme.fontSize.s : 
-        theme.fontSize.m}; 
-    color:${({theme}) => theme.colors.black};
-`
 
 const ButtonsWrapper = styled.div`
     width:100%;
@@ -51,7 +47,7 @@ const ButtonsWrapper = styled.div`
 `
 
 const Button = styled.button<{isDelete?:boolean}>`
-    color:${({isDelete,theme}) => isDelete ? theme.colors.error : theme.colors.lightPurple};
+    background-color:${({isDelete,theme}) => isDelete ? theme.colors.error : theme.colors.warning};
     border: none;
     border-radius: 4px;
     font-size: 20px;
@@ -95,15 +91,21 @@ transition: all 0.3s ease-in-out;
 
 
 const NoteItem : React.FC<NoteItemProps> = ({data,removeNote,size="medium",fontSize="medium"}) => {
-    return(
+    console.log(data)
+    const [isOpenModal, setIsOpenModal] = useState(false)
+
+    const openModal = () => setIsOpenModal(true);
+    const closeModal = () => setIsOpenModal(false);
+
+     return(
         <Wrapper data-testid="Note-Item" size={size}>
             <TitleHeading fontSize={fontSize}>{data.title}</TitleHeading>
             <ButtonsWrapper>
-            <Button isDelete={true} onClick={()=>removeNote(data.id)}>Delete</Button>
-            <Button isDelete={false}>Pokaż więcej</Button>
+            <Button isDelete={true} onClick={()=>removeNote(data._id)}>Delete</Button>
+            <Button isDelete={false} onClick={openModal}>Pokaż więcej</Button>
             </ButtonsWrapper>
             {data.category ? <CategoryLabel>{data.category}</CategoryLabel>: null }
-           
+            <ModalItem isOpen={isOpenModal} handleClose={closeModal} data={data} />
         </Wrapper>
     )
 }

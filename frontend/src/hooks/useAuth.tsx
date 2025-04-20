@@ -2,8 +2,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, register } from "../api/auth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNotify } from "./useNotify";
+import NoteContext from "../context/NoteContext";
+import { useNoteContext } from "./useNoteContext";
 
 interface AuthContextType {
     user: { role: string; name: string } | null;
@@ -21,10 +23,11 @@ interface AuthProviderType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider : React.FC<AuthProviderType> = ({children}) => {
+    const queryClient = useQueryClient();
     const [user,setUser] = useState<{role:string,name:string} | null>(null)
     const navigate = useNavigate();
     const {dispatchNotify} = useNotify();
-    
+
     useEffect(()=>{
         const storedUser = localStorage.getItem("userData");
         if(storedUser){
@@ -72,6 +75,9 @@ export const AuthProvider : React.FC<AuthProviderType> = ({children}) => {
         localStorage.removeItem("userData");
         setUser(null)
         dispatchNotify("Wylogowano pomyślnie")
+        resetNotes();
+        queryClient.removeQueries({queryKey:["notes-key"]})
+
     }
 
     

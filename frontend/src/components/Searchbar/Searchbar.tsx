@@ -3,6 +3,7 @@ import { categories } from "../../data/mockData"
 import { SearchbarWrapper, SearchForm, SearchInput, SearchSelect } from "./Searchbar.style"
 import NoteContext from "../../context/NoteContext"
 import { useForm } from "react-hook-form"
+import { useNoteContext } from "../../hooks/useNoteContext"
 
 interface InputsSearchBar {
     query:string,
@@ -10,26 +11,18 @@ interface InputsSearchBar {
 }
 
 const SearchBar = () => {
-    const {findNotesByQuery,findNotesByCategory} = useContext(NoteContext);
+    const { filterByCategory, filterByQuery} = useNoteContext();
     const {register,handleSubmit,formState:{errors},reset,watch} = useForm<InputsSearchBar>();
     const query = watch("query","");
     const selectCategory = watch("selectCategory","");
 
-    /*const onQueryChange = () => {
-        findNotesByQuery(query);
-    };
-
-    const onCategoryChange = () => {
-        console.log(selectCategory)
-        findNotesByCategory(selectCategory);
-    };*/
 
     const onQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        findNotesByQuery(event.target.value);
+        filterByQuery(event.target.value);
       };
       
     const onCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        findNotesByCategory(event.target.value);
+        filterByCategory(event.target.value);
       };
 
     return(

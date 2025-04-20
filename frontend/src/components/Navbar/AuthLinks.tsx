@@ -1,13 +1,13 @@
 import { useAuth } from "../../hooks/useAuth"
-import { AuthLink, AuthLinksContainer } from "./AuthLinks.style"
+import { AuthLink, AuthLinksContainer, LogOutButton } from "./AuthLinks.style"
 
 const AuthLinks = () => {
     const { user,logOut } = useAuth()
     return(
         <AuthLinksContainer>
-            <AuthLink to="/signin">Zaloguj się</AuthLink>
-            <AuthLink to="/signup">Zarejestruj się</AuthLink>
-            {user && <button onClick={logOut}>Wyloguj się</button>  }
+            {user ? <LogOutButton onClick={logOut}>Wyloguj się</LogOutButton> 
+            : <><AuthLink to="/signin">Zaloguj się</AuthLink>
+            <AuthLink to="/signup">Zarejestruj się</AuthLink></> }  
         </AuthLinksContainer>
     )
 }

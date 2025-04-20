@@ -49,6 +49,15 @@ class AuthController {
             res.status(500).json({ error: `Błąd serwera: ${error.message}` });
         }
     }
+
+    async getUsers(req, res) {
+        try {
+            const users = await User.find({});
+            res.status(200).json(users)
+        } catch (error) {
+            res.status(500).json({ error: `Błąd serwera: ${error.message}` })
+        }
+    }
 }
 
 module.exports = new AuthController();

@@ -5,6 +5,7 @@ import { Form, Input, MainWrapper,Button } from "./SignUp.style";
 import Alert from '@mui/material/Alert';
 import { useAuth } from "../hooks/useAuth";
 import { CircularProgress } from "@mui/material";
+import { useNotify } from "../hooks/useNotify";
 
 
 interface SignUpInputs {
@@ -18,6 +19,7 @@ const SignUp = () => {
     const {register,handleSubmit,formState:{errors},reset} = useForm<SignUpInputs>();
     const [error,setError] = useState("")
     const { registerUser, registerLoading } = useAuth();
+    const { dispatchNotify } = useNotify()
 
     const onSubmit : SubmitHandler<SignUpInputs> = async (data) => {
         console.log(data)
@@ -32,6 +34,8 @@ const SignUp = () => {
                 name:data.name
             }
             const res = await registerUser(credentials);
+            dispatchNotify("Zarejestrowano pomyślnie")
+            reset();
             return res.data;
         } catch (error:any) {
             console.log(error)

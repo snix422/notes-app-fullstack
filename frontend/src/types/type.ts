@@ -1,5 +1,5 @@
 export interface Note {
-    id:string,
+    _id:string,
     title:string,
     content:string,
     category:string
@@ -34,3 +34,9 @@ declare module 'styled-components' {
       };
     }
   }
+
+  export type NotePayload = {
+    title: string;
+    description: string;
+    category: string;
+  };

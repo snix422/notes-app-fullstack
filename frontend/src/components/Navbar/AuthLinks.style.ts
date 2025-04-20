@@ -13,3 +13,12 @@ export const AuthLink = styled(Link)`
     color: white;
     font-size: ${({theme}) => theme.fontSize.l };
 `
+export const LogOutButton = styled.button`
+    padding:0.5rem 1rem;
+    border-radius:0.3rem;
+    background-color: ${({theme}) => theme.colors.error};
+    font-size: ${({theme}) => theme.fontSize.l};
+    color:${({theme}) => theme.colors.white};
+    font-family:"Montserrat";
+    border:none;
+`
