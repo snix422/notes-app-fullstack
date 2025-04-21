@@ -1,6 +1,7 @@
 const User = require("../db/models/user")
 const { sessionSecretKey } = require("../config")
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const { sendRegistrationEmail } = require("../services/emailService");
 class AuthController {
     async register(req, res) {
         const { email, password, name } = req.body;
@@ -15,6 +16,7 @@ class AuthController {
             }
             await newUser.save();
             const token = jwt.sign({ userId: newUser._id, role: newUser.role }, sessionSecretKey, { expiresIn: "1h" });
+            await sendRegistrationEmail(email, name)
             res.status(201).json({
                 message: "Rejestracja zakończona sukcesem!",
                 token,
