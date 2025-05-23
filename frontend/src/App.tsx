@@ -14,7 +14,10 @@ console.log(msw);
 function App() {
 
   const {user} = useAuth();
-  console.log(user)
+  
+
+  
+  
  
   return (
       
