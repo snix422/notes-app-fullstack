@@ -14,11 +14,7 @@ console.log(msw);
 function App() {
 
   const {user} = useAuth();
-  
 
-  
-  
- 
   return (
       
       <MainTemplate>
